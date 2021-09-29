@@ -1,8 +1,8 @@
 
 import React, { useState } from "react";
+import PostForm from "./components/PostForm";
 import PostList from "./components/PostList";
-import MyButton from "./components/UI/button/MyButton";
-import MyInput from "./components/UI/input/MyInput";
+import MySelect from "./components/UI/select/MySelect";
 import './styles/App.css'
 
 function App() {
@@ -12,26 +12,40 @@ function App() {
   { id: 4, title: 'Javascript4', body: 'Description' },
   { id: 5, title: 'Javascript5', body: 'Description' }])
 
-  const [title, setTitle] = useState('')
+  const [selectedSort,setSelectedSort] =useState('')
 
-  const addNewPost = (e) => {
-    e.preventDefault()
-    console.log(title)
+  const createPost = (newPost) => {
+    setPosts([...posts, newPost])
+  }
+  const removePost = (post) => {
+    setPosts(posts.filter(p => p.id !== post.id))
+  }
+  const sortPosts = (sort) =>{
+    setSelectedSort(sort);
+    setPosts([...posts].sort((a,b)=> a[sort].localeCompare(b[sort])))
   }
 
   return (
     <div className="App">
-      <form>
-        <MyInput
-          value = {title}
-          onChange = {e => setTitle(e.target.value)}
-          type='text'
-          placeholder='название поста'
+      <PostForm create={createPost} />
+      <hr style = {{margin:'15px 0'}}/>
+      <div>
+        <MySelect
+          value ={selectedSort}
+          onChange={sortPosts}
+          defaultValue='Сортировка по'
+          options={[
+            {value: 'title', name: 'По названию'},
+            {value: 'body', name: 'По описанию'}
+          ]}
         />
-        <MyInput type='text' placeholder='описание поста' />
-        <MyButton onClick={addNewPost}>Создать пост</MyButton>
-      </form>
-      <PostList posts={posts} title='список про js' />
+      </div>
+      {posts.length !== 0
+        ? <PostList remove={removePost} posts={posts} title='список про js' />
+        : <h1 style={{ textAlign: 'center' }}>Здесь пока нет постов</h1>
+
+      }
+
     </div>
   );
 }
