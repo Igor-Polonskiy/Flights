@@ -4,8 +4,10 @@ import PostForm from "./components/PostForm";
 import PostList from "./components/PostList";
 import MySelect from "./components/UI/select/MySelect";
 import './styles/App.css'
+import flights from "./flights.json";
 
 function App() {
+  console.log(flights.result)
   const [posts, setPosts] = useState([{ id: 1, title: 'Javascript', body: 'Description' },
   { id: 2, title: 'Javascript2', body: 'Description' },
   { id: 3, title: 'Javascript3', body: 'Description' },
