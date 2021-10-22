@@ -1,0 +1,45 @@
+.cardHeader {
+    background-color: #425df5;
+    width: 100%;
+    min-width: 300px;
+    display: flex;
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    color: white;
+}
+
+.headerPrice {
+    font-size: 20px;
+}
+
+.headerLeft {
+    text-align: end;
+}
+
+.flightDirection {
+    display: flex;
+    width: 100%;
+}
+
+.time {
+    display: flex;
+    justify-content: space-around;
+}
+
+.segments {
+    display: flex;
+    justify-content: center;
+}
+
+.selectBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border: none;
+    width: 100%;
+    color: white;
+    background-color: #fc9d03
+}
