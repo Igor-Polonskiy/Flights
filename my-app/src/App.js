@@ -1,58 +1,26 @@
 import React, { useState } from "react";
-import PostForm from "./components/PostForm";
-import PostList from "./components/PostList";
-import MySelect from "./components/UI/select/MySelect";
-import FlightCard from "./components/UI/FlightCard/FlightCard";
 import "./styles/App.css";
 import flightList from "./flights.json";
 import FlightList from "./components/FlightList";
+import Filter from "./components/Filter/Filter";
 
 function App() {
-
-  const [flights, setFlights] = useState(flightList.result.flights)
-  console.log(flights)
-  const [posts, setPosts] = useState([
-    { id: 1, title: "Javascript", body: "Description" },
-    { id: 2, title: "Javascript2", body: "Description" },
-    { id: 3, title: "Javascript3", body: "Description" },
-    { id: 4, title: "Javascript4", body: "Description" },
-    { id: 5, title: "Javascript5", body: "Description" },
-  ]);
-
-  const [selectedSort, setSelectedSort] = useState("");
-
-  const createPost = (newPost) => {
-    setPosts([...posts, newPost]);
-  };
-  const removePost = (post) => {
-    setPosts(posts.filter((p) => p.id !== post.id));
-  };
-  const sortPosts = (sort) => {
-    setSelectedSort(sort);
-    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
-  };
+  const [flights, setFlights] = useState(flightList.result.flights);
+  const [filterFlights, setFilterFlights] = useState(flights);
  
+ 
+  const getFilterFlights = (resp) => {   
+    setFilterFlights(resp)
+  };
+
   return (
     <div className="App">
-      <FlightList flights ={flights}></FlightList>
-      <PostForm create={createPost} />
-      <hr style={{ margin: "15px 0" }} />
-      <div>
-        <MySelect
-          value={selectedSort}
-          onChange={sortPosts}
-          defaultValue="Сортировка по"
-          options={[
-            { value: "title", name: "По названию" },
-            { value: "body", name: "По описанию" },
-          ]}
-        />
-      </div>
-      {posts.length !== 0 ? (
-        <PostList remove={removePost} posts={posts} title="список про js" />
-      ) : (
-        <h1 style={{ textAlign: "center" }}>Здесь пока нет постов</h1>
-      )}
+      <aside>
+        <Filter getFilterFlights={getFilterFlights} flights={flights}></Filter>
+      </aside>
+      <main>
+        <FlightList flights={filterFlights}></FlightList>
+      </main>
     </div>
   );
 }

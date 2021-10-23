@@ -10,14 +10,6 @@
 }
 
 .App {
-    width: 800px;
-}
-
-.post {
+    max-width: 1200px;
     display: flex;
-    padding: 15px;
-    border: 2px solid teal;
-    margin-top: 15px;
-    justify-content: space-between;
-    align-items: center;
 }

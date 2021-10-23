@@ -1,34 +1,60 @@
-.cardHeader {
-    background-color: #425df5;
-    width: 100%;
-    min-width: 300px;
-    display: flex;
-    height: 50px;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    color: white;
-}
-
-.headerPrice {
-    font-size: 20px;
-}
-
-.headerLeft {
-    text-align: end;
+.flight {
+    max-width: 90%;
+    margin: auto;
 }
 
 .flightDirection {
     display: flex;
     width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+span {
+    color: #425df5;
 }
 
 .time {
+    margin-top: 10px;
     display: flex;
     justify-content: space-around;
 }
 
 .segments {
+    color: #fc9d03;
+    width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.segments * {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+}
+
+.duration {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.segments div::before,
+.segments div::after {
+    content: '';
+    width: 30%;
+    height: 1px;
+    background-color: gray;
+    align-self: center;
+    margin: 10px;
+}
+
+.arrTime,
+.depTime {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.airlines {
+    margin: 10px;
 }

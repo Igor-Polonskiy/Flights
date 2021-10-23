@@ -16,15 +16,14 @@ export default function FlightCard(flight) {
     )
   );
 
-  console.log(flight);
   return (
     <div>
       <div className={classes.cardHeader}>
         <div>{flight.flight.flight.carrier.caption}</div>
         <div className={classes.headerLeft}>
           <div className={classes.headerPrice}>
-            {curFlight.price.totalFeeAndTaxes.amount}
-            {curFlight.price.totalFeeAndTaxes.currency}
+            {curFlight.price.total.amount}
+            {curFlight.price.total.currency}
           </div>
           <div className={classes.headerPasangers}>
             Стоимость для одного взрослого пассажира
@@ -32,6 +31,7 @@ export default function FlightCard(flight) {
         </div>
       </div>
       <FlightDirection leg={curFlight.legs[0]} />
+      <div className={classes.bluLine}></div>
       <FlightDirection leg={curFlight.legs[1]} />
       <button className={classes.selectBtn}>ВЫБРАТЬ</button>
     </div>

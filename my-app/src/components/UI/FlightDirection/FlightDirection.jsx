@@ -10,28 +10,32 @@ export default function FlightDirection(props) {
   );
 
   return (
-    <div>
+    <div className={classes.flight}>
       <div className={classes.flightDirection}>
         <div className={classes.flightFrom}>
-          {leg.segments[0].departureCity? leg.segments[0].departureCity.caption : ""},{" "}
-          {leg.segments[0].departureAirport.caption} (
-          {leg.segments[0].departureAirport.uid})
+          {leg.segments[0].departureCity
+            ? leg.segments[0].departureCity.caption
+            : ""}
+          , {leg.segments[0].departureAirport.caption}
+          <span>({leg.segments[0].departureAirport.uid})&#129042;</span>
         </div>
-        <div>-></div>
-        <div className={classes.flightTo}>
-          {segments > 1
-            ? `
-          ${leg.segments[1].arrivalCity? leg.segments[1].arrivalCity.caption:""},
-          ${leg.segments[1].arrivalAirport.caption} (
-          ${leg.segments[1].arrivalAirport.uid})
-        `
-            : `
-          ${leg.segments[0].arrivalCity.caption},
-          ${leg.segments[0].arrivalAirport.caption} (
-          ${leg.segments[0].arrivalAirport.uid})
-         `}
-        </div>
+        {segments > 1 ? (
+          <div className={classes.flightTo}>
+            {leg.segments[1].arrivalCity
+              ? leg.segments[1].arrivalCity.caption
+              : ""}
+            ,{leg.segments[1].arrivalAirport.caption}
+            <span>({leg.segments[1].arrivalAirport.uid})</span>)
+          </div>
+        ) : (
+          <div className={classes.flightTo}>
+            {leg.segments[0].arrivalCity.caption},
+            {leg.segments[0].arrivalAirport.caption}
+            <span>({leg.segments[0].arrivalAirport.uid})</span>
+          </div>
+        )}
       </div>
+      <hr/>
       <div className={classes.time}>
         <div className={classes.depTime}>
           {depDate.getHours()}:{depDate.getMinutes() < 10 ? 0 : ""}
@@ -46,7 +50,7 @@ export default function FlightDirection(props) {
           </span>
         </div>
         <div className={classes.duration}>
-          {Math.floor(leg.duration / 60)}:{leg.duration % 60}
+          {Math.floor(leg.duration / 60)} ч {(leg.duration % 60) < 10 ? 0:""}{leg.duration % 60} мин
         </div>
         <div className={classes.arrTime}>
           <span>
@@ -62,10 +66,10 @@ export default function FlightDirection(props) {
         </div>
       </div>
       <div className={classes.segments}>
-        {{ segments } > 1 ? <hr /> : <div>{segments - 1} пересадка</div>}
+        { segments  > 1 ?  <div>{segments - 1} пересадка</div>:<hr />}
       </div>
       <div className={classes.airlines}>
-          рейс выполняет {leg.segments[0].airline.caption}
+        Pейс выполняет: {leg.segments[0].airline.caption}
       </div>
     </div>
   );
