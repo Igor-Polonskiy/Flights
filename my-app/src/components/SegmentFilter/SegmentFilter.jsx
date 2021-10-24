@@ -8,34 +8,6 @@ export default function SegmentFilter(props) {
   useEffect(() => {
     props.getSegmetFilter(oneSegmentchecked, twoSegmentchecked);
   }, [oneSegmentchecked, twoSegmentchecked]);
-  /*
-  useEffect(() => {
-      if(oneSegmentchecked || twoSegmentchecked){
-        props.getFilterFlights(filterFlights)
-      }else {
-        props.getFilterFlights(flights)
-      }
-  }, [filterFlights, oneSegmentchecked,  twoSegmentchecked]);
-
-  const filter = (flights) => {
-      console.log('filter')
-      
-    if (oneSegmentchecked) {
-        let arr = flights.filter((flight) =>flight.flight.legs[0].segments.length < 2)
-        arr = arr.filter((flight) =>flight.flight.legs[1].segments.length < 2)
-        setFilterFlights(arr)
-      
-    }
-    if (twoSegmentchecked) {
-        let arr = flights.filter((flight) =>flight.flight.legs[0].segments.length > 1)
-        setFilterFlights(arr)
-      
-    }
-    console.log( filterFlights[0].flight.legs[0].segments.length)
-  };
-
-  
-  };*/
 
   const onChange0 = (e) => {
     setOneSegmentChecked(!oneSegmentchecked);

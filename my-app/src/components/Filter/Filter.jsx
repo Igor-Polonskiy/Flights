@@ -9,7 +9,8 @@ export default function Filter(props) {
   const [sortedFlights, setSortedFlights] = useState(props.flights);
   const [oneSegmentchecked, setOneSegmentChecked] = useState(false);
   const [twoSegmentchecked, setTwoSegmentChecked] = useState(false);
-  const [price,setPrice] = useState([0,0])
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(40000);
 
   useEffect(() => {
     let flights = [...filterFlights];
@@ -26,8 +27,9 @@ export default function Filter(props) {
   useEffect(() => {
     let flights = [...props.flights];
     filter(flights);
-  }, [oneSegmentchecked, twoSegmentchecked]);
+  }, [oneSegmentchecked, twoSegmentchecked, minPrice, maxPrice]);
 
+  
   useEffect(() => {
     props.getSortedFlights(sortedFlights);
   }, [sortedFlights]);
@@ -52,7 +54,7 @@ export default function Filter(props) {
 
   const filter = (flights) => {
     console.log("filter");
-    let filterflights = flights;
+    let filterflights = [...flights];
 
     
     if (oneSegmentchecked) {
@@ -70,11 +72,17 @@ export default function Filter(props) {
       filterflights = [...arr];
     }
     if (oneSegmentchecked && twoSegmentchecked) {
-      filterflights = flights;
+      filterflights = [...flights];
     }
+
+    filterflights = filterflights.filter(flight =>  +flight.flight.price.total.amount > minPrice);
+    filterflights = filterflights.filter(flight =>  +flight.flight.price.total.amount < maxPrice)
 
     setFilterFlights(filterflights);
   };
+
+ 
+
 
   const getSortValue = (value) => {
     setSortValue(value);
@@ -83,8 +91,9 @@ export default function Filter(props) {
     setOneSegmentChecked(one);
     setTwoSegmentChecked(two);
   };
-  const getPrice = (price)=>{
-    setPrice(price)
+  const getPrice = (min, max)=>{
+    setMinPrice(min)
+    setMaxPrice(max)
   }
 
 
