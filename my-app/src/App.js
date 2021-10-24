@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <aside>
-        <Filter getFilterFlights={getFilterFlights} flights={flights}></Filter>
+        <Filter getSortedFlights={getFilterFlights} flights={flights}></Filter>
       </aside>
       <main>
         <FlightList flights={filterFlights}></FlightList>
