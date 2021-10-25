@@ -14,6 +14,7 @@ export default function Filter(props) {
   const [twoSegmentchecked, setTwoSegmentChecked] = useState(false);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(40000);
+  const [airlinesFilter, setAirlinesFilter] = useState()
 
   useEffect(() => {
     let flights = [...filterFlights];
@@ -98,8 +99,8 @@ export default function Filter(props) {
     setMinPrice(min)
     setMaxPrice(max)
   }
-const getAirlinesFilter = () =>{
-  
+const getAirlinesFilter = (airlines) =>{
+  setAirlinesFilter(airlines)
 }
 
   return (

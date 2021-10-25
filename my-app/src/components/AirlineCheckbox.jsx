@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 export default function AirlineCheckbox(props) {
-    const [checked,setChecked] = useState(false)
+    const [checked,setChecked] = useState(true)
 
     useEffect(() => {
         props.isChecked(props.airline, checked)
@@ -10,7 +10,6 @@ export default function AirlineCheckbox(props) {
     const onChange = () =>{
         setChecked(!checked)
     }
-
 
     return (
         <lable style = {{marginTop: "10px"}}>

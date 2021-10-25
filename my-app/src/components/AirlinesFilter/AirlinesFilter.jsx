@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import AirlineCheckbox from "../AirlineCheckbox";
 import classes from "./AirlineFilter.module.css";
 
@@ -8,16 +8,19 @@ export default function AirlinesFilter(props) {
   let airlines = [...new Set(unique)];
   let airobj = {};
   airlines.forEach((item) => {
-    airobj[item] = false;
+    airobj[item] = true;
   });
 
   const [air, setAirlines] = useState(airobj);
+
+  useEffect(() => {
+    props.getAirlinesFilter(air)
+  }, [air])
 
   const isChecked = (airline, check) => {
     const obj = air;
       obj[airline] = check
     setAirlines(obj);
-    console.log(obj);
   };
 
   return (
