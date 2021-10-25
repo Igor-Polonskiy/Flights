@@ -19,7 +19,7 @@ export default function FlightCard(flight) {
   return (
     <div>
       <div className={classes.cardHeader}>
-        <div>{flight.flight.flight.carrier.caption}</div>
+        <div>{curFlight.carrier.caption}</div>
         <div className={classes.headerLeft}>
           <div className={classes.headerPrice}>
             {curFlight.price.total.amount}

@@ -98,14 +98,16 @@ export default function Filter(props) {
     setMinPrice(min)
     setMaxPrice(max)
   }
-
+const getAirlinesFilter = () =>{
+  
+}
 
   return (
     <div className={classes.filter}>
       <SortFilter getSortValue={getSortValue} />
       <SegmentFilter getSegmetFilter={getSegmetFilter}></SegmentFilter>
       <PriceFilter getPrice={getPrice}></PriceFilter>
-      <AirlinesFilter></AirlinesFilter>
+      <AirlinesFilter allFlights = {props.flights} getAirlinesFilter={getAirlinesFilter}></AirlinesFilter>
     </div>
   );
 }
