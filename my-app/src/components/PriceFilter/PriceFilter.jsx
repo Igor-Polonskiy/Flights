@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from "react";
+import classes from './PriceFilter.module.css'
+
 
 export default function PriceFilter(props) {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(40000);
 
-  useEffect(() => {
+ /* useEffect(() => {
     props.getPrice(minPrice, maxPrice)
-  }, [minPrice, maxPrice])
+  }, [minPrice, maxPrice])*/
+
+  const submit = (e) =>{
+    e.preventDefault()
+    console.log('submit')
+    props.getPrice(minPrice, maxPrice)
+  }
 
   return (
-    <div>
+    <form onSubmit={submit} className ={classes.form}>
     <div>Цена</div>
       <label>
         от <input type="number"  min="0"  value= {minPrice}  onChange={e => setMinPrice(e.target.value )}></input>
@@ -17,6 +25,7 @@ export default function PriceFilter(props) {
       <label>
         до <input type="number"  min="0" value= {maxPrice}  onChange={e => setMaxPrice(e.target.value )}></input>
       </label>
-    </div>
+      <input type="submit" style={{ whidth: 1,height:1, position: 'absolute', left: -9999  }} />
+    </form>
   );
 }

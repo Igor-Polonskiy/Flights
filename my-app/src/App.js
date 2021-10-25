@@ -19,7 +19,11 @@ function App() {
         <Filter getSortedFlights={getFilterFlights} flights={flights}></Filter>
       </aside>
       <main>
+      { filterFlights.length ? 
         <FlightList flights={filterFlights}></FlightList>
+        :
+        <h1 style={{width: '600px', textAlign: 'center', marginTop: '40px'}}>Нет рейсов по заданным параметрам</h1>
+      }
       </main>
     </div>
   );

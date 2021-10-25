@@ -1,5 +1,6 @@
 .flight {
     max-width: 90%;
+    min-width: 600px;
     margin: auto;
 }
 
@@ -29,7 +30,7 @@ span {
 }
 
 .segments * {
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: center;
 }

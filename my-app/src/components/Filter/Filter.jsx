@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import AirlinesFilter from "../AirlinesFilter/AirlinesFilter";
 import PriceFilter from "../PriceFilter/PriceFilter";
 import SegmentFilter from "../SegmentFilter/SegmentFilter";
 import SortFilter from "../SortFilter/SortFilter";
+import classes from './Filter.module.css'
+
 
 export default function Filter(props) {
   const [filterFlights, setFilterFlights] = useState(props.flights);
@@ -98,10 +101,11 @@ export default function Filter(props) {
 
 
   return (
-    <div>
+    <div className={classes.filter}>
       <SortFilter getSortValue={getSortValue} />
       <SegmentFilter getSegmetFilter={getSegmetFilter}></SegmentFilter>
       <PriceFilter getPrice={getPrice}></PriceFilter>
+      <AirlinesFilter></AirlinesFilter>
     </div>
   );
 }
