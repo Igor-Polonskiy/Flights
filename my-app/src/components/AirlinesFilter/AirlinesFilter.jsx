@@ -16,7 +16,7 @@ export default function AirlinesFilter(props) {
 
   useEffect(() => {
    props.getAirlinesFilter(allAirlinesState)
-  }, [allAirlinesState, props])
+  }, [allAirlinesState])
 
   const isChecked = (airline, check) => {
     const obj = {...allAirlinesState};
