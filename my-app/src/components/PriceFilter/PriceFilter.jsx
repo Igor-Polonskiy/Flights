@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import classes from './PriceFilter.module.css'
 
 
 export default function PriceFilter(props) {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(40000);
-
- /* useEffect(() => {
-    props.getPrice(minPrice, maxPrice)
-  }, [minPrice, maxPrice])*/
 
   const submit = (e) =>{
     e.preventDefault()

@@ -5,11 +5,6 @@ export default function SortFilter(props) {
   const [sortValue, setSortValue] = useState("priceUp");
 
   useEffect(() => {
-    console.log(props)
-    props.getSortValue(sortValue);
-  }, []);
-
-  useEffect(() => {
     props.getSortValue(sortValue);
   }, [sortValue]);
 

@@ -3,8 +3,7 @@ import AirlinesFilter from "../AirlinesFilter/AirlinesFilter";
 import PriceFilter from "../PriceFilter/PriceFilter";
 import SegmentFilter from "../SegmentFilter/SegmentFilter";
 import SortFilter from "../SortFilter/SortFilter";
-import classes from './Filter.module.css'
-
+import classes from "./Filter.module.css";
 
 export default function Filter(props) {
   const [filterFlights, setFilterFlights] = useState(props.flights);
@@ -14,26 +13,26 @@ export default function Filter(props) {
   const [twoSegmentchecked, setTwoSegmentChecked] = useState(false);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(40000);
-  const [airlinesFilter, setAirlinesFilter] = useState()
+  const [airlinesFilter, setAirlinesFilter] = useState();
 
   useEffect(() => {
     let flights = [...filterFlights];
     sort(flights);
     setSortedFlights(flights);
-  }, [sortValue]);
+  }, [sortValue, filterFlights]);
 
-  useEffect(() => {
-    let flights = [...filterFlights];
-    sort(flights);
-    setSortedFlights(flights);
-  }, [filterFlights]);
 
   useEffect(() => {
     let flights = [...props.flights];
     filter(flights);
-  }, [oneSegmentchecked, twoSegmentchecked, minPrice, maxPrice]);
+  }, [
+    oneSegmentchecked,
+    twoSegmentchecked,
+    minPrice,
+    maxPrice,
+    airlinesFilter,
+  ]);
 
-  
   useEffect(() => {
     props.getSortedFlights(sortedFlights);
   }, [sortedFlights]);
@@ -57,10 +56,8 @@ export default function Filter(props) {
   };
 
   const filter = (flights) => {
-    console.log("filter");
     let filterflights = [...flights];
 
-    
     if (oneSegmentchecked) {
       let arr = filterflights.filter(
         (flight) => flight.flight.legs[0].segments.length < 2
@@ -72,43 +69,58 @@ export default function Filter(props) {
       let arr = filterflights.filter(
         (flight) => flight.flight.legs[0].segments.length > 1
       );
-      arr = arr.filter((flight) => flight.flight.legs[1].segments.length > 1)
+      arr = arr.filter((flight) => flight.flight.legs[1].segments.length > 1);
       filterflights = [...arr];
     }
     if (oneSegmentchecked && twoSegmentchecked) {
       filterflights = [...flights];
     }
 
-    filterflights = filterflights.filter(flight =>  +flight.flight.price.total.amount > minPrice);
-    filterflights = filterflights.filter(flight =>  +flight.flight.price.total.amount < maxPrice)
+    filterflights = filterflights.filter(
+      (flight) => +flight.flight.price.total.amount > minPrice
+    );
+    filterflights = filterflights.filter(
+      (flight) => +flight.flight.price.total.amount < maxPrice
+    );
+
+    for (let key in airlinesFilter) {
+      if ((airlinesFilter[key] == false)) {
+        filterflights = filterflights.filter(
+          (flight) => flight.flight.carrier.caption !== key
+        );
+      }
+    }
 
     setFilterFlights(filterflights);
   };
 
- 
-
-
   const getSortValue = (value) => {
     setSortValue(value);
   };
+
   const getSegmetFilter = (one, two) => {
     setOneSegmentChecked(one);
     setTwoSegmentChecked(two);
   };
-  const getPrice = (min, max)=>{
-    setMinPrice(min)
-    setMaxPrice(max)
-  }
-const getAirlinesFilter = (airlines) =>{
-  setAirlinesFilter(airlines)
-}
+  
+  const getPrice = (min, max) => {
+    setMinPrice(min);
+    setMaxPrice(max);
+  };
+  
+  const getAirlinesFilter = (airlines) => {
+    setAirlinesFilter(airlines);
+  };
 
   return (
     <div className={classes.filter}>
       <SortFilter getSortValue={getSortValue} />
       <SegmentFilter getSegmetFilter={getSegmetFilter}></SegmentFilter>
       <PriceFilter getPrice={getPrice}></PriceFilter>
-      <AirlinesFilter allFlights = {props.flights} getAirlinesFilter={getAirlinesFilter}></AirlinesFilter>
+      <AirlinesFilter
+        allFlights={props.flights}
+        getAirlinesFilter={getAirlinesFilter}
+      ></AirlinesFilter>
     </div>
   );
 }

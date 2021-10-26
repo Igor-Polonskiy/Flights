@@ -1,32 +1,33 @@
-import React, { useState, useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import AirlineCheckbox from "../AirlineCheckbox";
 import classes from "./AirlineFilter.module.css";
 
 export default function AirlinesFilter(props) {
-  let arr = [...props.allFlights];
-  const unique = arr.map((item) => (item = item.flight.carrier.caption));
-  let airlines = [...new Set(unique)];
-  let airobj = {};
-  airlines.forEach((item) => {
-    airobj[item] = true;
+  
+  const allFlights = [...props.allFlights];
+  const unique = allFlights.map((item) => (item = item.flight.carrier.caption));
+  let allAirlines = [...new Set(unique)];
+  let allAirlinesCheck = {};
+  allAirlines.forEach((item) => {
+    allAirlinesCheck[item] = true;
   });
 
-  const [air, setAirlines] = useState(airobj);
+  const [allAirlinesState, setAllAirlinesState] = useState(allAirlinesCheck);
 
   useEffect(() => {
-    props.getAirlinesFilter(air)
-  }, [air])
+   props.getAirlinesFilter(allAirlinesState)
+  }, [allAirlinesState, props])
 
   const isChecked = (airline, check) => {
-    const obj = air;
+    const obj = {...allAirlinesState};
       obj[airline] = check
-    setAirlines(obj);
+      setAllAirlinesState(obj);
   };
 
   return (
     <div className={classes.AirlinesFilter}>
       <div>Авиалинии</div>
-      {airlines.map((airline) => (
+      {allAirlines.map((airline) => (
         <AirlineCheckbox
           airline={airline}
           key={airline}

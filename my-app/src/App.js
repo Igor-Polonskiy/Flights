@@ -5,7 +5,7 @@ import FlightList from "./components/FlightList";
 import Filter from "./components/Filter/Filter";
 
 function App() {
-  const [flights, setFlights] = useState(flightList.result.flights);
+  const [flights] = useState(flightList.result.flights);
   const [filterFlights, setFilterFlights] = useState(flights);
  
  

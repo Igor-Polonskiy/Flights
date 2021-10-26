@@ -1,20 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import classes from "./FlightCard.module.css";
 import FlightDirection from "../FlightDirection/FlightDirection";
 
 export default function FlightCard(flight) {
   const [curFlight] = useState(flight.flight.flight);
-  const [segments] = useState(curFlight.legs[0].segments.length);
-  const [depDate, setDepDate] = useState(
-    new Date(curFlight.legs[0].segments[0].departureDate)
-  );
-  const [arrDate, setArrDate] = useState(
-    new Date(
-      { segments } > 1
-        ? curFlight.legs[0].segments[1].arrivalDate
-        : curFlight.legs[0].segments[0].arrivalDate
-    )
-  );
 
   return (
     <div>

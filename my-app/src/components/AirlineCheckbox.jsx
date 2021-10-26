@@ -12,9 +12,9 @@ export default function AirlineCheckbox(props) {
     }
 
     return (
-        <lable style = {{marginTop: "10px"}}>
+        <label style = {{marginTop: "10px"}}>
             <input type="checkbox" onChange={onChange} checked = {checked} ></input>
             {' '} {props.airline}
-        </lable>
+        </label>
     )
 }
